@@ -1,0 +1,15 @@
+Prevents passing any mappings to `github.com/golang/protobuf/ptypes/...`
+to protoc-gen-go.
+===================================================================
+--- go/tools/builders/protoc.go
++++ go/tools/builders/protoc.go
+@@ -76,6 +76,9 @@
+ 	pluginName := strings.TrimSuffix(
+ 		strings.TrimPrefix(filepath.Base(*plugin), "protoc-gen-"), ".exe")
+ 	for _, m := range imports {
++		if strings.HasPrefix(m, "google/protobuf/") {
++			continue
++		}
+ 		options = append(options, fmt.Sprintf("M%v", m))
+ 	}
+ 	if runtime.GOOS == "windows" {

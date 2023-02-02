@@ -1,0 +1,18 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/sessfeld/rules-go-ptypes-repro
+
+# gazelle:resolve go google.golang.org/genproto/googleapis/longrunning @org_golang_google_genproto//googleapis/longrunning
+# gazelle:resolve proto go google/longrunning/operations.proto @org_golang_google_genproto//googleapis/longrunning
+
+gazelle(name = "gazelle")
+
+gazelle(
+    name = "gazelle-update-repos",
+    command = "update-repos",
+    extra_args = [
+        "-from_file=go.mod",
+        "-to_macro=go.bzl%go_repositories",
+        "-prune",
+    ],
+)

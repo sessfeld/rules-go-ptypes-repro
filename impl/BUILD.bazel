@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "impl",
+    srcs = ["with_lro.go"],
+    importpath = "github.com/sessfeld/rules-go-ptypes-repro/impl",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos",
+        "@com_google_cloud_go_longrunning//autogen/longrunningpb",
+        "@org_golang_google_grpc//:go_default_library",
+    ],
+)

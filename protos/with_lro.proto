@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package protos;
+
+import "google/longrunning/operations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/sessfeld/rules-go-ptypes-repro/protos";
+
+service ReturnsLro {
+  rpc Export (ExportRequest) returns (google.longrunning.Operation);
+}
+
+message ExportRequest {
+  google.protobuf.Timestamp just_for_the_import = 1;
+}
